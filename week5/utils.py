@@ -63,12 +63,16 @@ def question_to_vec(question, embeddings, dim):
     ########################
     #### YOUR CODE HERE ####
     ########################
-
-    # remove this when you're done
-    raise NotImplementedError(
-        "Open utils.py and fill with your code. In case of Google Colab, download"
-        "(https://github.com/hse-aml/natural-language-processing/blob/master/project/utils.py), "
-        "edit locally and upload using '> arrow on the left edge' -> Files -> UPLOAD")
+    result = np.zeros(dim)
+    cnt = 0
+    words = question.split()
+    for word in words:
+        if word in embeddings:
+            result += np.array(embeddings[word])
+            cnt += 1
+    if cnt != 0:
+        result /= cnt
+    return result
 
 
 def unpickle_file(filename):
